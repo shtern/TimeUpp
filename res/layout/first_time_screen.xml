@@ -12,5 +12,42 @@
         
         android:textStyle="bold"
         android:textSize="150sp"/>
-
+    <Button
+        android:id="@+id/settings_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="50dp"
+        android:text="Настройки"
+        android:layout_below="@+id/clock"
+        ></Button>
+    <Button
+        android:id="@+id/create_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="50dp"
+        android:text="Создать"
+        android:layout_below="@+id/clock"
+        ></Button>
+    <TextView
+        android:id="@+id/history_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/create_button"
+        android:text="Прошлые места"></TextView>
+    <ListView
+        android:id="@+id/olddest"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/history_tv"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"></ListView>
 </RelativeLayout>
