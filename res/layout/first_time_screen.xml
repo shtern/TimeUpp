@@ -41,11 +41,12 @@
         android:layout_marginTop="25dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/create_button"
+        android:textSize="25sp"
         android:text="Прошлые места"></TextView>
     <ListView
         android:id="@+id/olddest"
-        android:layout_marginTop="10dp"
-        android:dividerHeight="10dp"
+        android:layout_marginTop="20dp"
+        android:dividerHeight="17dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/history_tv"

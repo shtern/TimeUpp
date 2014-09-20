@@ -280,12 +280,12 @@ int id homeAsUp 0x7f050005
 int id icon 0x7f05002a
 int id ifRoom 0x7f05000a
 int id image 0x7f050027
-int id line 0x7f05004e
+int id line 0x7f05004d
 int id listMode 0x7f050001
 int id list_item 0x7f050029
 int id listview_background_shape 0x7f05005d
 int id middle 0x7f050012
-int id name 0x7f05004d
+int id name 0x7f05004e
 int id name_edittext 0x7f050045
 int id name_textview 0x7f050044
 int id never 0x7f050009

@@ -10,15 +10,17 @@
     android:layout_alignParentTop="true"
     android:layout_marginTop="10dp"
     android:layout_marginLeft="10dp"/>
-<TextView 
+<EditText
     android:id="@+id/timechosen"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="14:00"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
     android:layout_alignParentRight="true"
     android:layout_below="@+id/timetext"
     android:layout_marginTop="10dp"
-    android:layout_marginRight="10dp"/>
+    android:layout_marginRight="15dp"/>
 <TextView 
     android:id="@+id/routegarant"
     android:layout_width="wrap_content"
@@ -36,7 +38,7 @@
     android:entries="@array/garant_percent"
     android:prompt="@string/routeacc"
     android:layout_marginTop="10dp"
-    android:layout_marginRight="10dp"
+    android:layout_marginRight="15dp"
     android:layout_alignParentRight="true"></Spinner>
 <TextView 
     android:id="@+id/traffictext"
@@ -52,7 +54,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
-    android:layout_marginRight="10dp"
+    android:layout_marginRight="15dp"
     android:layout_alignParentRight="true"
     android:checked="true"
     android:layout_below="@+id/traffictext"/>
@@ -73,7 +75,7 @@
 
     android:entries="@array/transp_array"
     android:layout_marginTop="10dp"
-    android:layout_marginRight="10dp"
+    android:layout_marginRight="15dp"
     android:layout_alignParentRight="true"></Spinner>
 
 </RelativeLayout>

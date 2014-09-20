@@ -73,7 +73,7 @@ public class MainActivity extends ActionBarActivity {
 		destlist = (ListView) page.findViewById(R.id.olddest);
 		destlist.setFadingEdgeLength(0);
 
-		destlist.setVerticalScrollBarEnabled(false);
+		destlist.setVerticalScrollBarEnabled(true);
 		destlist.setHorizontalScrollBarEnabled(false);
 		destlist.setVerticalFadingEdgeEnabled(false);
 		destlist.setHorizontalFadingEdgeEnabled(false);

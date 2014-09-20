@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
                 android:text="назначить" />
 
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/destpointtext"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp" />
+                android:layout_marginRight="15dp" />
 
             <TextView
                 android:id="@+id/arrival_date"
@@ -48,14 +48,16 @@
                 android:layout_marginTop="10dp"
                 android:text="Дата прибытия" />
 
-            <TextView
+            <EditText
                 android:id="@+id/date_selector"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/arrival_date"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:text="сегодня" />
 
             <TextView
@@ -67,14 +69,16 @@
                 android:layout_marginTop="10dp"
                 android:text="Время прибытия" />
 
-            <TextView
+            <EditText
                 android:id="@+id/time_selector"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/arrival_time"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:text="21:00" />
 
             <TextView
@@ -92,8 +96,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/name_textview"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
+                
                 android:hint="Маршрут1" />
 
             <TextView
@@ -111,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/signal_tv"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginTop="10dp"
                 android:entries="@array/tones" >
             </Spinner>
@@ -131,7 +136,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/routespinner"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginTop="20dp" />
 
             <Button
@@ -149,7 +154,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/volume_tv"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="15dp"
                 android:layout_marginTop="30dp"
                 android:text="Запуск" />
         </RelativeLayout>

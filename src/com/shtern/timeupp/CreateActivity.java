@@ -1,14 +1,112 @@
 package com.shtern.timeupp;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
+import android.app.TimePickerDialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TimePicker;
 
 public class CreateActivity extends Activity {
+	private Calendar cal;
+	private int day;
+	private int month;
+	private int year;
+	EditText dataselector;
+	EditText timeselector;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.create_actvity);
+		cal = Calendar.getInstance();
+		day = cal.get(Calendar.DAY_OF_MONTH);
+		month = cal.get(Calendar.MONTH);
+		year = cal.get(Calendar.YEAR);
+		dataselector = (EditText) findViewById(R.id.date_selector);
+		timeselector = (EditText) findViewById(R.id.time_selector);
+		
+		timeselector.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+            	TimeDialog();
+
+            }
+        });
+		timeselector.setOnFocusChangeListener(new OnFocusChangeListener() {
+		    @Override
+		    public void onFocusChange(View v, boolean hasFocus) {
+		        if(hasFocus)
+		        {
+		        	TimeDialog(); 
+
+		        }
+		    }
+		});
+		dataselector.setOnClickListener(new OnClickListener() {
+
+	        @Override
+	        public void onClick(View v) {
+
+	            DateDialog(); 
+
+	        }
+	    });
+		dataselector.setOnFocusChangeListener(new OnFocusChangeListener() {
+		    @Override
+		    public void onFocusChange(View v, boolean hasFocus) {
+		        if(hasFocus)
+		        {
+		        	 DateDialog(); 
+
+		        }
+		    }
+		});
+	}
+	
+	
+	public void DateDialog(){
+
+	    OnDateSetListener listener=new OnDateSetListener() {
+
+	        @Override
+	        public void onDateSet(DatePicker view, int year, int monthOfYear,int dayOfMonth)
+	        {
+
+	        	dataselector.setText(dayOfMonth+"/"+monthOfYear+"/"+year);
+
+	        }};
+
+	    DatePickerDialog dpDialog=new DatePickerDialog(this, listener, year, month, day);
+	    dpDialog.show();
+
+	}
+	public void TimeDialog(){
+		  Calendar mcurrentTime = Calendar.getInstance();
+          int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+          int minute = mcurrentTime.get(Calendar.MINUTE);
+          TimePickerDialog mTimePicker;
+          mTimePicker = new TimePickerDialog(CreateActivity.this, new TimePickerDialog.OnTimeSetListener() {
+              @Override
+              public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+         
+
+            	  timeselector.setText( selectedHour + ":" + String.format("%02d", Integer.valueOf(selectedMinute)) );
+              }
+          }, hour, minute,true);
+          mTimePicker.setTitle("Select Time");
+          mTimePicker.show();
 	}
 }

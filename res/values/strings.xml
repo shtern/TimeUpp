@@ -5,10 +5,9 @@
     <string name="routeacc">15%</string>
     <string name="action_settings">Settings</string>
 	 <string-array name="transp_array">
-	     <item>Наземный</item>
+	     <item>Автомобиль</item>
 	     <item>Пешком</item>
-	     <item>На машине</item>
-	     <item>На метро</item>
+	     <item>Общественный</item>
 	     </string-array>
 	     <string-array name="garant_percent">
 	     <item>15%</item>
