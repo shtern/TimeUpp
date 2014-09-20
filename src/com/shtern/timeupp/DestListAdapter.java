@@ -54,7 +54,7 @@ public class DestListAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(final int pos, View convertView, ViewGroup parent) {
-		DestListItem entry = mList.get(pos);
+		final DestListItem entry = mList.get(pos);
 
 		// inflating list view layout if null
 		if (convertView == null) {
@@ -76,10 +76,13 @@ public class DestListAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				
 				final Intent intent = new Intent(mContext,
 						CreateActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-				// intent.putExtra("token", token);
+				intent.putExtra("destination",entry.getDest());
+				intent.putExtra("time", entry.getTime());
+				intent.putExtra("name", entry.getName());
 				mContext.startActivity(intent);
 			}
 			

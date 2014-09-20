@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 public class CreateActivity extends Activity {
@@ -23,12 +25,17 @@ public class CreateActivity extends Activity {
 	private int year;
 	EditText dataselector;
 	EditText timeselector;
-
+	EditText name_tv;
+	EditText dest_et;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		setContentView(R.layout.create_actvity);
+		Intent intent = getIntent();
+		String name = intent.getStringExtra("name");
+		String time = intent.getStringExtra("time");
+		String destination = intent.getStringExtra("destination");
 		cal = Calendar.getInstance();
 		day = cal.get(Calendar.DAY_OF_MONTH);
 		month = cal.get(Calendar.MONTH);
@@ -36,6 +43,15 @@ public class CreateActivity extends Activity {
 		dataselector = (EditText) findViewById(R.id.date_selector);
 		timeselector = (EditText) findViewById(R.id.time_selector);
 		
+		if (!time.equals(""))
+		timeselector.setText(time);
+		
+		name_tv = (EditText) findViewById(R.id.name_edittext);
+		if (!name.equals(""))
+			name_tv.setText(name);
+		dest_et = (EditText) findViewById(R.id.adress);
+		if (!destination.equals(""))
+			dest_et.setText(destination);
 		timeselector.setOnClickListener(new OnClickListener() {
 
             @Override

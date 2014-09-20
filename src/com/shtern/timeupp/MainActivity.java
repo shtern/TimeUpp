@@ -65,7 +65,9 @@ public class MainActivity extends ActionBarActivity {
 				final Intent intent = new Intent(getApplicationContext(),
 						CreateActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				// intent.putExtra("token", token);
+				intent.putExtra("destination","");
+				intent.putExtra("time", "");
+				intent.putExtra("name", "");
 				startActivity(intent);
 			}
 			
@@ -80,9 +82,11 @@ public class MainActivity extends ActionBarActivity {
 		destlist.setFadingEdgeLength(0);
 		
 		adapter = new DestListAdapter(getApplicationContext(), itemlist);
-		itemlist.add(new DestListItem("Москва", "Бар", "12:00"));
-		itemlist.add(new DestListItem("Москва", "Баня", "20:00"));
-		itemlist.add(new DestListItem("Москва", "Вытрезвитель", "23:00"));
+		itemlist.add(new DestListItem("г. Москва, Ленинский проспект, 16", "Работа", "08:00"));
+		itemlist.add(new DestListItem("г. Москва, Покровка, 10", "Бар", "18:00"));
+		itemlist.add(new DestListItem("г. Москва, Гоголевский бул. 16", "Баня", "20:00"));
+		itemlist.add(new DestListItem("г. Москва, Тверская ул., 23", "Клуб", "23:00"));
+		itemlist.add(new DestListItem("г. Москва, Скорняжный пер., 3", "Домой", "04:00"));
 		adapter.notifyDataSetChanged();
 		destlist.setAdapter(adapter);
 	
