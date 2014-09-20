@@ -9,12 +9,15 @@ import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -25,8 +28,10 @@ public class CreateActivity extends Activity {
 	private int year;
 	EditText dataselector;
 	EditText timeselector;
-	EditText name_tv;
+	EditText name_et;
 	EditText dest_et;
+	Button savebutton;
+	Button startbutton;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,8 +39,8 @@ public class CreateActivity extends Activity {
 		setContentView(R.layout.create_actvity);
 		Intent intent = getIntent();
 		String name = intent.getStringExtra("name");
-		String time = intent.getStringExtra("time");
-		String destination = intent.getStringExtra("destination");
+		final String time = intent.getStringExtra("time");
+		final String destination = intent.getStringExtra("destination");
 		cal = Calendar.getInstance();
 		day = cal.get(Calendar.DAY_OF_MONTH);
 		month = cal.get(Calendar.MONTH);
@@ -46,9 +51,9 @@ public class CreateActivity extends Activity {
 		if (!time.equals(""))
 		timeselector.setText(time);
 		
-		name_tv = (EditText) findViewById(R.id.name_edittext);
+		name_et = (EditText) findViewById(R.id.name_edittext);
 		if (!name.equals(""))
-			name_tv.setText(name);
+			name_et.setText(name);
 		dest_et = (EditText) findViewById(R.id.adress);
 		if (!destination.equals(""))
 			dest_et.setText(destination);
@@ -90,6 +95,38 @@ public class CreateActivity extends Activity {
 		        }
 		    }
 		});
+		savebutton = (Button) findViewById(R.id.save_button);
+		savebutton.setOnClickListener(new OnClickListener() {
+
+	        @Override
+	        public void onClick(View v) {
+	        	//MainActivity.this.itemlist.add(new DestListItem(dest_et.getText().toString(),name_et.getText().toString(),timeselector.getText().toString()));
+	        	MainActivity.addItem(new DestListItem(dest_et.getText().toString(),name_et.getText().toString(),timeselector.getText().toString()));
+	        	CreateActivity.this.finish();
+	        }
+	    });
+		startbutton = (Button) findViewById(R.id.start_button);
+		startbutton.setOnClickListener(new OnClickListener() {
+
+	        @Override
+	        public void onClick(View v) {
+	        	RelativeLayout page = (RelativeLayout) getLayoutInflater().inflate(
+	    				R.layout.alarmpage, null);
+	        	TextView drivetime = (TextView) page.findViewById(R.id.drivetime);
+	        	drivetime.setText(time);
+	        	drivetime.setTypeface(Typeface
+	    				.createFromAsset(getAssets(), "digital-7.ttf"));
+	        	RemainClock remainclock = (RemainClock) page.findViewById(R.id.remaintime);
+	        	remainclock.setTimeToDrive(time);
+	        	remainclock.setTypeface(Typeface
+	    				.createFromAsset(getAssets(), "digital-7.ttf"));
+	        	TextView routetv= (TextView) page.findViewById(R.id.route_tv);
+	        	routetv.setText(destination);
+	        	MainActivity.pagerAdapter.addView(page);
+	        	MainActivity.pager.setCurrentItem(MainActivity.pagerAdapter.getCount());
+	        	CreateActivity.this.finish();
+	        }
+	    });
 	}
 	
 	

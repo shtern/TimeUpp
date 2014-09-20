@@ -14,7 +14,7 @@
     android:id="@+id/timechosen"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="14:00"
+    android:text="00:45"
     android:focusable="false"
     android:focusableInTouchMode="false"
     android:layout_alignParentRight="true"

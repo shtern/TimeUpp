@@ -23,11 +23,11 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 public class MainActivity extends ActionBarActivity {
-	ViewPager pager;
-	TUPagerAdapter pagerAdapter;
-	DestListAdapter adapter;
+	static ViewPager pager;
+	static TUPagerAdapter pagerAdapter;
+	static DestListAdapter adapter;
 	ListView destlist;
-	final List<DestListItem> itemlist = new ArrayList<DestListItem>();
+	final static List<DestListItem> itemlist = new ArrayList<DestListItem>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +95,11 @@ public class MainActivity extends ActionBarActivity {
 		clock.setTypeface(Typeface
 				.createFromAsset(getAssets(), "digital-7.ttf"));
 		pagerAdapter.addView(page);
+	}
+	public static void addItem(DestListItem item)
+	{
+		itemlist.add(item);
+		adapter.notifyDataSetChanged();
 	}
 
 }
