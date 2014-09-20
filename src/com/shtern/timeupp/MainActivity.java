@@ -15,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.DigitalClock;
 import android.widget.ListView;
@@ -53,6 +55,21 @@ public class MainActivity extends ActionBarActivity {
 			}
 
 		});
+		Button createbutton = (Button) page
+				.findViewById(R.id.create_button);
+		createbutton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				final Intent intent = new Intent(getApplicationContext(),
+						CreateActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				// intent.putExtra("token", token);
+				startActivity(intent);
+			}
+			
+		});
 		destlist = (ListView) page.findViewById(R.id.olddest);
 		destlist.setFadingEdgeLength(0);
 
@@ -60,15 +77,15 @@ public class MainActivity extends ActionBarActivity {
 		destlist.setHorizontalScrollBarEnabled(false);
 		destlist.setVerticalFadingEdgeEnabled(false);
 		destlist.setHorizontalFadingEdgeEnabled(false);
-		destlist.setDivider(new ColorDrawable(Color.BLACK));
 		destlist.setFadingEdgeLength(0);
-		destlist.setDivider(new ColorDrawable(Color.WHITE));
+		
 		adapter = new DestListAdapter(getApplicationContext(), itemlist);
 		itemlist.add(new DestListItem("Москва", "Бар", "12:00"));
 		itemlist.add(new DestListItem("Москва", "Баня", "20:00"));
 		itemlist.add(new DestListItem("Москва", "Вытрезвитель", "23:00"));
 		adapter.notifyDataSetChanged();
 		destlist.setAdapter(adapter);
+	
 		CustomDigitalClock clock = (CustomDigitalClock) page
 				.findViewById(R.id.clock);
 		clock.setTypeface(Typeface

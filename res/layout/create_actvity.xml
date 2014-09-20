@@ -1,0 +1,158 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/destpointtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Точка назначения" />
+
+            <TextView
+                android:id="@+id/aligntext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:text="назначить" />
+
+            <EditText
+                android:id="@+id/adress"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/destpointtext"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:id="@+id/arrival_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/adress"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Дата прибытия" />
+
+            <TextView
+                android:id="@+id/date_selector"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/arrival_date"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:text="сегодня" />
+
+            <TextView
+                android:id="@+id/arrival_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/date_selector"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Время прибытия" />
+
+            <TextView
+                android:id="@+id/time_selector"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/arrival_time"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:text="21:00" />
+
+            <TextView
+                android:id="@+id/name_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/time_selector"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Название" />
+
+            <EditText
+                android:id="@+id/name_edittext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/name_textview"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:hint="Маршрут1" />
+
+            <TextView
+                android:id="@+id/signal_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/name_edittext"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Сигнал" />
+
+            <Spinner
+                android:id="@+id/routespinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/signal_tv"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:entries="@array/tones" >
+            </Spinner>
+
+            <TextView
+                android:id="@+id/volume_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/routespinner"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Громкость" />
+
+            <SeekBar
+                android:id="@+id/volume_seekbar"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/routespinner"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="20dp" />
+
+            <Button
+                android:id="@+id/save_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/volume_tv"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:text="Сохранить" />
+
+            <Button
+                android:id="@+id/start_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/volume_tv"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="30dp"
+                android:text="Запуск" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

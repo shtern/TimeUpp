@@ -4,14 +4,18 @@ import java.util.List;
 import java.util.Vector;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class DestListAdapter extends BaseAdapter {
@@ -66,6 +70,20 @@ public class DestListAdapter extends BaseAdapter {
 		TextView time = (TextView) convertView.findViewById(R.id.time);
 		time.setText(entry.getTime());
 		time.setTextColor(Color.BLACK);
+		RelativeLayout rl = (RelativeLayout) convertView.findViewById(R.id.destlistlayout);
+		rl.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				final Intent intent = new Intent(mContext,
+						CreateActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				// intent.putExtra("token", token);
+				mContext.startActivity(intent);
+			}
+			
+		});
 
 		return convertView;
 	}
