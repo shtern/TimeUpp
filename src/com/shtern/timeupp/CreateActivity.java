@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
@@ -110,23 +111,58 @@ public class CreateActivity extends Activity {
 
 	        @Override
 	        public void onClick(View v) {
-	        	RelativeLayout page = (RelativeLayout) getLayoutInflater().inflate(
+	        	final RelativeLayout page = (RelativeLayout) getLayoutInflater().inflate(
 	    				R.layout.alarmpage, null);
 	        	TextView drivetime = (TextView) page.findViewById(R.id.drivetime);
-	        	drivetime.setText(time);
+	        	drivetime.setText(timeselector.getText().toString());
 	        	drivetime.setTypeface(Typeface
 	    				.createFromAsset(getAssets(), "digital-7.ttf"));
 	        	RemainClock remainclock = (RemainClock) page.findViewById(R.id.remaintime);
-	        	remainclock.setTimeToDrive(time);
+	        	remainclock.setTimeToDrive(timeselector.getText().toString());
 	        	remainclock.setTypeface(Typeface
 	    				.createFromAsset(getAssets(), "digital-7.ttf"));
 	        	TextView routetv= (TextView) page.findViewById(R.id.route_tv);
-	        	routetv.setText(destination);
+	        	routetv.setText(dest_et.getText().toString());
+	        	final Button next = (Button) page.findViewById(R.id.nextbutton);
+	        	next.setOnClickListener(new OnClickListener() {
+
+	    	        @Override
+	    	        public void onClick(View v) {
+	    	        	final int repos = MainActivity.pagerAdapter.getItemPosition(page)+1;
+	    	        	MainActivity.pager.setCurrentItem(repos);
+	    	        }
+	        	});
+	        	
+	        	final Button prev = (Button) page.findViewById(R.id.prevbutton);
+	        	if (MainActivity.pagerAdapter.getCount()>1)
+	        	prev.setOnClickListener(new OnClickListener() {
+
+	    	        @Override
+	    	        public void onClick(View v) {
+	    	        	final int repos = MainActivity.pagerAdapter.getItemPosition(page)-1;
+	    	        	MainActivity.pager.setCurrentItem(repos);
+	    	        }
+	        	});
+	        	else prev.setVisibility(View.GONE);
+	        	final Button settings = (Button) page.findViewById(R.id.settingsbutton);
+	        	settings.setOnClickListener(new OnClickListener() {
+
+	        		@Override
+	    			public void onClick(View v) {
+	    				// TODO Auto-generated method stub
+	    				final Intent intent = new Intent(getApplicationContext(),
+	    						SettingsActivity.class);
+	    				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	    				
+	    				startActivity(intent);
+	    			}
+	        	});
 	        	MainActivity.pagerAdapter.addView(page);
 	        	MainActivity.pager.setCurrentItem(MainActivity.pagerAdapter.getCount());
 	        	CreateActivity.this.finish();
 	        }
 	    });
+		
 	}
 	
 	

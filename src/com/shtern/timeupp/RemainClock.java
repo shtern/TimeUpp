@@ -1,11 +1,14 @@
 package com.shtern.timeupp;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 
 
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -15,6 +18,7 @@ import android.os.SystemClock;
 import android.provider.Settings;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.TextView;
 
 public class RemainClock extends TextView {
@@ -59,30 +63,44 @@ public class RemainClock extends TextView {
 
     @Override
     protected void onAttachedToWindow() {
-        mTickerStopped = false;
+    	mTickerStopped = false;
         super.onAttachedToWindow();
         mHandler = new Handler();
-
-        /**
-         * requests a tick on the next hard-second boundary
-         */
+        
         mTicker = new Runnable() {
-                public void run() {
-                    if (mTickerStopped) return;
-                    mCalendar.setTimeInMillis(System.currentTimeMillis());
+            public void run() {
+                if (mTickerStopped) return;
+                try {
+                	mCalendar.setTimeInMillis(System.currentTimeMillis());
+                    SimpleDateFormat format = new SimpleDateFormat("kk:mm");
+                    Date Date1;
+                    Date Date2;
+					
+						 Date1 = format.parse(DateFormat.format(m24, mCalendar).toString().replace("::", ":"));
+						 Date2 = format.parse(mTimeToDrive);
+			
+                    //Date1.setTime(System.currentTimeMillis());
                     
-                    setText(getDifference(DateFormat.format(m24, mCalendar).toString(),mTimeToDrive));
-           
+                    long mills = Date2.getTime() - Date1.getTime();
+                    Log.v("Data1", ""+Date1.getTime());
+                    Log.v("Data2", ""+Date2.getTime());
+                    int Hours = (int) (mills/(1000 * 60 * 60));
+                    int Mins = (int) (mills/(1000*60)) % 60;
+
+                    String diff = String.format("%02d",Hours) + ":" + String.format("%02d",Mins); // updated value every1 second
+                    setText(diff);
                     invalidate();
                     long now = SystemClock.uptimeMillis();
                     long next = now + (1000 - now % 1000);
                     mHandler.postAtTime(mTicker, next);
-                   
-                    
-                }
-            };
-        mTicker.run();
-    }
+        		} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+        };
+    mTicker.run();
+}
     public void setTimeToDrive(String time){
     	mTimeToDrive=time;
     }
@@ -106,35 +124,7 @@ public class RemainClock extends TextView {
             mFormat = m12;
         }
     }
-    public static String getDifference(String dateStart, String dateStop) {
-        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
 
-        Date d1 = null;
-        Date d2 = null;
-        long diffMinutes=0;
-        long diffSeconds=0;
-        try {
-            d1 = format.parse(dateStart);
-            d2 = format.parse(dateStop);
-
-            //in milliseconds
-            long diff = d2.getTime() - d1.getTime();
-
-             diffSeconds = diff / 1000 % 60;
-             diffMinutes = diff / (60 * 1000) % 60;
-            long diffHours = diff / (60 * 60 * 1000) % 24;
-            long diffDays = diff / (24 * 60 * 60 * 1000);
-
-            System.out.print(diffDays + " days, ");
-            System.out.print(diffHours + " hours, ");
-            System.out.print(diffMinutes + " minutes, ");
-            System.out.print(diffSeconds + " seconds.");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return diffMinutes+":"+diffSeconds;
-    }
     private class FormatChangeObserver extends ContentObserver {
         public FormatChangeObserver() {
             super(new Handler());

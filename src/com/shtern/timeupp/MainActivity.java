@@ -50,7 +50,7 @@ public class MainActivity extends ActionBarActivity {
 				final Intent intent = new Intent(getApplicationContext(),
 						SettingsActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				// intent.putExtra("token", token);
+				
 				startActivity(intent);
 			}
 

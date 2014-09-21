@@ -27,5 +27,30 @@
         android:layout_below="@+id/remaintime"
         android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"/>
+    <Button 
+        android:id="@+id/prevbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/route_tv"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="15dp"
+        android:text="Прошлый" />
+    <Button 
+        android:id="@+id/nextbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/route_tv"
+        android:layout_marginTop="100dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:text="Следующий" />
+       <Button 
+        android:id="@+id/settingsbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/route_tv"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:text="Настройки" />
 
 </RelativeLayout>
