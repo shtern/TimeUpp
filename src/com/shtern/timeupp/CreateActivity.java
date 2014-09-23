@@ -1,10 +1,18 @@
 package com.shtern.timeupp;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -15,6 +23,8 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,6 +48,7 @@ public class CreateActivity extends Activity {
 	EditText timeselector;
 	EditText name_et;
 	EditText dest_et;
+	EditText address;
 	Button savebutton;
 	Button startbutton;
 	TextView aligntv;
@@ -45,7 +56,7 @@ public class CreateActivity extends Activity {
 	TUPagerAdapter pagerAdapter;
 	GoogleMap googleMap;
 	RelativeLayout mappage;
-
+	String filterAddress="";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -67,7 +78,7 @@ public class CreateActivity extends Activity {
 		year = cal.get(Calendar.YEAR);
 		dataselector = (EditText) createpage.findViewById(R.id.date_selector);
 		timeselector = (EditText) createpage.findViewById(R.id.time_selector);
-
+		address = (EditText) createpage.findViewById(R.id.adress);
 		if (!time.equals(""))
 			timeselector.setText(time);
 
@@ -209,8 +220,42 @@ public class CreateActivity extends Activity {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		googleMap.setOnMapLongClickListener(new OnMapLongClickListener(){
 
+			@Override
+			public void onMapLongClick(LatLng arg0) {
+				// TODO Auto-generated method stub
+				filterAddress="";
+				googleMap.clear();
+				googleMap.addMarker(new MarkerOptions()
+		        .position(arg0)
+		        .title("Текущая цель"));
+                Geocoder geoCoder = new Geocoder(
+                        getBaseContext(), Locale.getDefault());
+                try {
+                    List<Address> addresses = geoCoder.getFromLocation(
+                            arg0.latitude, 
+                            arg0.longitude, 1);
+
+                    if (addresses.size() > 0) {
+                        for (int index = 0; 
+                                index < addresses.get(0).getMaxAddressLineIndex(); index++)
+                            filterAddress += addresses.get(0).getAddressLine(index) + " ";
+                    }
+                    
+                    address.setText(filterAddress);
+                    pager.setCurrentItem(0);
+                }catch (IOException ex) {        
+                    ex.printStackTrace();
+                }catch (Exception e2) {
+                    // TODO: handle exception
+
+                    e2.printStackTrace();
+                } 
+			}
+			
+		});
+		
 	}
 
 	@SuppressLint("NewApi")
@@ -226,6 +271,12 @@ public class CreateActivity extends Activity {
 						"Sorry! unable to create maps", Toast.LENGTH_SHORT)
 						.show();
 			}
+			 CameraUpdate center=
+				        CameraUpdateFactory.newLatLng(new LatLng(55.753559,37.609218));
+				    CameraUpdate zoom=CameraUpdateFactory.zoomTo(10);
+
+				    googleMap.moveCamera(center);
+				    googleMap.animateCamera(zoom);
 		}
 	}
 
