@@ -34,7 +34,7 @@
         android:layout_below="@+id/route_tv"
         android:layout_marginTop="100dp"
         android:layout_marginLeft="15dp"
-        android:text="Прошлый" />
+        android:text="←" />
     <Button 
         android:id="@+id/nextbutton"
         android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
         android:layout_marginTop="100dp"
         android:layout_alignParentRight="true"
         android:layout_marginRight="15dp"
-        android:text="Следующий" />
+        android:text="→" />
        <Button 
         android:id="@+id/settingsbutton"
         android:layout_width="wrap_content"

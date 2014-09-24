@@ -10,8 +10,10 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import android.annotation.SuppressLint;
@@ -20,6 +22,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
@@ -31,6 +34,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -56,7 +60,9 @@ public class CreateActivity extends Activity {
 	TUPagerAdapter pagerAdapter;
 	GoogleMap googleMap;
 	RelativeLayout mappage;
-	String filterAddress="";
+	Marker marker;
+	String filterAddress = "";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -129,7 +135,11 @@ public class CreateActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+				hideKeyboard(imm);
 				pager.setCurrentItem(1);
+				if (marker != null)
+					marker.showInfoWindow();
 			}
 		});
 		savebutton = (Button) createpage.findViewById(R.id.save_button);
@@ -220,46 +230,54 @@ public class CreateActivity extends Activity {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		googleMap.setOnMapLongClickListener(new OnMapLongClickListener(){
+		googleMap.setOnMapLongClickListener(new OnMapLongClickListener() {
 
 			@Override
 			public void onMapLongClick(LatLng arg0) {
 				// TODO Auto-generated method stub
-				filterAddress="";
+				filterAddress = "";
+				Geocoder geoCoder = new Geocoder(getBaseContext(), Locale
+						.getDefault());
+				try {
+					List<Address> addresses = geoCoder.getFromLocation(
+							arg0.latitude, arg0.longitude, 1);
+
+					if (addresses.size() > 0) {
+						for (int index = 0; index < addresses.get(0)
+								.getMaxAddressLineIndex(); index++)
+							filterAddress += addresses.get(0).getAddressLine(
+									index)
+									+ " ";
+					}
+
+				} catch (IOException ex) {
+					ex.printStackTrace();
+				} catch (Exception e2) {
+					// TODO: handle exception
+
+					e2.printStackTrace();
+				}
 				googleMap.clear();
-				googleMap.addMarker(new MarkerOptions()
-		        .position(arg0)
-		        .title("Текущая цель"));
-                Geocoder geoCoder = new Geocoder(
-                        getBaseContext(), Locale.getDefault());
-                try {
-                    List<Address> addresses = geoCoder.getFromLocation(
-                            arg0.latitude, 
-                            arg0.longitude, 1);
+				marker = googleMap.addMarker(new MarkerOptions().position(arg0)
+						.title(filterAddress));
+				marker.showInfoWindow();
 
-                    if (addresses.size() > 0) {
-                        for (int index = 0; 
-                                index < addresses.get(0).getMaxAddressLineIndex(); index++)
-                            filterAddress += addresses.get(0).getAddressLine(index) + " ";
-                    }
-                    
-                    address.setText(filterAddress);
-                    pager.setCurrentItem(0);
-                }catch (IOException ex) {        
-                    ex.printStackTrace();
-                }catch (Exception e2) {
-                    // TODO: handle exception
-
-                    e2.printStackTrace();
-                } 
 			}
-			
+
 		});
-		
+		googleMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+
+			@Override
+			public boolean onMarkerClick(Marker arg0) {
+				address.setText(filterAddress);
+				pager.setCurrentItem(0);
+				return true;
+			}
+
+		});
 	}
 
-	@SuppressLint("NewApi")
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+
 	private void initilizeMap() {
 		if (googleMap == null) {
 			googleMap = ((MapFragment) getFragmentManager().findFragmentById(
@@ -271,15 +289,17 @@ public class CreateActivity extends Activity {
 						"Sorry! unable to create maps", Toast.LENGTH_SHORT)
 						.show();
 			}
-			 CameraUpdate center=
-				        CameraUpdateFactory.newLatLng(new LatLng(55.753559,37.609218));
-				    CameraUpdate zoom=CameraUpdateFactory.zoomTo(10);
+			CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(
+					55.753559, 37.609218));
+			CameraUpdate zoom = CameraUpdateFactory.zoomTo(10);
 
-				    googleMap.moveCamera(center);
-				    googleMap.animateCamera(zoom);
+			googleMap.moveCamera(center);
+			googleMap.animateCamera(zoom);
 		}
 	}
-
+	void hideKeyboard(InputMethodManager imm) {
+		imm.hideSoftInputFromWindow(address.getWindowToken(), 0);
+	}
 	public void DateDialog() {
 
 		OnDateSetListener listener = new OnDateSetListener() {
