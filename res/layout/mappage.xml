@@ -2,11 +2,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
- 
+
+    <AutoCompleteTextView
+        android:id="@+id/searchbox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:imeOptions="actionSearch"
+        android:completionThreshold="2"
+        android:inputType="textAutoComplete|textAutoCorrect" />
+
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
- 
+        android:layout_height="match_parent"
+        android:layout_below="@+id/searchbox" />
+
 </RelativeLayout>

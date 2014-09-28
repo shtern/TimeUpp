@@ -1477,7 +1477,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f080028;
         public static final int action_menu_presenter=0x7f080029;
         public static final int action_mode_close_button=0x7f080036;
-        public static final int action_settings=0x7f080078;
+        public static final int action_settings=0x7f080079;
         public static final int activity_chooser_view_content=0x7f080037;
         public static final int adress=0x7f080058;
         public static final int aligntext=0x7f080057;
@@ -1521,8 +1521,8 @@ containing a value of this type.
         public static final int line=0x7f080066;
         public static final int listMode=0x7f080014;
         public static final int list_item=0x7f08003b;
-        public static final int listview_background_shape=0x7f080077;
-        public static final int map=0x7f08006f;
+        public static final int listview_background_shape=0x7f080078;
+        public static final int map=0x7f080070;
         public static final int match_parent=0x7f08000c;
         public static final int middle=0x7f080024;
         public static final int monochrome=0x7f080013;
@@ -1541,7 +1541,7 @@ containing a value of this type.
         public static final int radio=0x7f080041;
         public static final int remaintime=0x7f080051;
         public static final int route_tv=0x7f080052;
-        public static final int routegarant=0x7f080072;
+        public static final int routegarant=0x7f080073;
         public static final int routespinner=0x7f080060;
         public static final int sandbox=0x7f080008;
         public static final int satellite=0x7f080002;
@@ -1556,6 +1556,7 @@ containing a value of this type.
         public static final int search_plate=0x7f080048;
         public static final int search_src_text=0x7f080049;
         public static final int search_voice_btn=0x7f08004d;
+        public static final int searchbox=0x7f08006f;
         public static final int selectionDetails=0x7f08000b;
         public static final int settings_button=0x7f08006b;
         public static final int settingsbutton=0x7f080055;
@@ -1572,14 +1573,14 @@ containing a value of this type.
         public static final int terrain=0x7f080003;
         public static final int time=0x7f080069;
         public static final int time_selector=0x7f08005c;
-        public static final int timechosen=0x7f080071;
-        public static final int timetext=0x7f080070;
+        public static final int timechosen=0x7f080072;
+        public static final int timetext=0x7f080071;
         public static final int title=0x7f08003d;
         public static final int top_action_bar=0x7f080032;
-        public static final int trafficbutton=0x7f080074;
-        public static final int traffictext=0x7f080073;
-        public static final int transpspin=0x7f080076;
-        public static final int transptype=0x7f080075;
+        public static final int trafficbutton=0x7f080075;
+        public static final int traffictext=0x7f080074;
+        public static final int transpspin=0x7f080077;
+        public static final int transptype=0x7f080076;
         public static final int up=0x7f080033;
         public static final int useLogo=0x7f080016;
         public static final int viewpager=0x7f08004f;
@@ -1646,8 +1647,9 @@ containing a value of this type.
         public static final int destlistitem=0x7f03001c;
         public static final int first_time_screen=0x7f03001d;
         public static final int mappage=0x7f03001e;
-        public static final int settings=0x7f03001f;
-        public static final int support_simple_spinner_dropdown_item=0x7f030020;
+        public static final int search_item=0x7f03001f;
+        public static final int settings=0x7f030020;
+        public static final int support_simple_spinner_dropdown_item=0x7f030021;
     }
     public static final class menu {
         public static final int main=0x7f0d0000;
@@ -1694,7 +1696,10 @@ containing a value of this type.
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f070025;
         public static final int action_settings=0x7f070029;
+        public static final int align=0x7f07002b;
         public static final int app_name=0x7f070027;
+        public static final int arrival_date=0x7f07002c;
+        public static final int arrival_time=0x7f07002d;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -1784,7 +1789,31 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f070018;
+        /**  FirstScreen Strings 
+         */
+        public static final int create=0x7f070037;
+        /**  CreateActivity Strings 
+         */
+        public static final int destination=0x7f07002a;
+        /**  SettingsActivity Strings 
+         */
+        public static final int gather_time=0x7f070039;
+        public static final int next=0x7f070035;
+        public static final int note_traffic=0x7f07003b;
+        public static final int prev_places=0x7f070038;
+        /**  AlarmPage Strings 
+         */
+        public static final int previous=0x7f070034;
+        public static final int route=0x7f07002f;
+        public static final int route_guarant=0x7f07003a;
+        public static final int route_name=0x7f07002e;
         public static final int routeacc=0x7f070028;
+        public static final int save=0x7f070032;
+        public static final int settings=0x7f070036;
+        public static final int signal=0x7f070030;
+        public static final int start=0x7f070033;
+        public static final int transp_type=0x7f07003c;
+        public static final int volume=0x7f070031;
         /**  Text on a placeholder buy button when Google Play services is not
          available or up-to-date 
          */

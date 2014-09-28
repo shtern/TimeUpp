@@ -3,53 +3,59 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <com.shtern.timeupp.CustomDigitalClock 
+    <com.shtern.timeupp.CustomDigitalClock
         android:id="@+id/clock"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        
-        android:textStyle="bold"
-        android:textSize="130sp"/>
+        android:textSize="130sp"
+        android:textStyle="bold" />
+
     <Button
         android:id="@+id/settings_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_below="@+id/clock"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="50dp"
-        android:text="Настройки"
-        android:layout_below="@+id/clock"
-        ></Button>
+        android:text="@+string/settings" >
+    </Button>
+
     <Button
         android:id="@+id/create_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
+        android:layout_below="@+id/clock"
         android:layout_marginRight="5dp"
         android:layout_marginTop="50dp"
-        android:text="Создать"
-        android:layout_below="@+id/clock"
-        ></Button>
+        android:text="@+string/create" >
+    </Button>
+
     <TextView
         android:id="@+id/history_tv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/create_button"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="25dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/create_button"
-        android:textSize="25sp"
-        android:text="Прошлые места"></TextView>
+        android:text="@+string/prev_places"
+        android:textSize="25sp" >
+    </TextView>
+
     <ListView
         android:id="@+id/olddest"
-        android:layout_marginTop="20dp"
-        android:dividerHeight="17dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/history_tv"
         android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"></ListView>
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="20dp"
+        android:dividerHeight="17dp" >
+    </ListView>
+
 </RelativeLayout>

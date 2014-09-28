@@ -4,19 +4,48 @@
     <string name="app_name">TimeUpp</string>
     <string name="routeacc">15%</string>
     <string name="action_settings">Settings</string>
-	 <string-array name="transp_array">
-	     <item>Автомобиль</item>
-	     <item>Пешком</item>
-	     <item>Общественный</item>
-	     </string-array>
-	     <string-array name="garant_percent">
-	     <item>15%</item>
-	     <item>40%</item>
-	     <item>65%</item>
-	     <item>80%</item>
-	     </string-array>
-	     <string-array name="tones">
-	     <item>Сигнал1</item>
-	     <item>Сигнал2</item>
-	     </string-array>
+    
+    <!-- CreateActivity Strings -->
+	<string name="destination">Точка назначения</string>
+	<string name="align">назначить</string>
+	<string name="arrival_date">Дата прибытия</string>
+	<string name="arrival_time">Время прибытия</string>
+    <string name="route_name">Название</string>
+    <string name="route">Маршрут 1</string>
+    <string name="signal">Сигнал</string>
+    <string name="volume">Громкость</string>
+    <string name="save">Сохранить</string>
+    <string name="start">Запуск</string>
+    
+    <!-- AlarmPage Strings -->
+    <string name="previous">←</string>
+    <string name="next">→</string>
+    <string name="settings">Настройки</string>
+    
+     <!-- FirstScreen Strings -->
+    <string name="create">Создать</string>
+    <string name="prev_places">Прошлые места</string>
+    
+    <!-- SettingsActivity Strings -->
+    <string name="gather_time">Время на сбор</string>
+    <string name="route_guarant">Гарант маршрута</string>
+    <string name="note_traffic">Учитывать пробки</string>
+    <string name="transp_type">Тип транспорта</string>
+    
+    <string-array name="transp_array">
+        <item>Автомобиль</item>
+        <item>Пешком</item>
+        <item>Общественный</item>
+    </string-array>
+    <string-array name="garant_percent">
+        <item>15%</item>
+        <item>40%</item>
+        <item>65%</item>
+        <item>80%</item>
+    </string-array>
+    <string-array name="tones">
+        <item>Сигнал1</item>
+        <item>Сигнал2</item>
+    </string-array>
+
 </resources>

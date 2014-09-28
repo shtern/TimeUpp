@@ -1,81 +1,90 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<TextView 
-    android:id="@+id/timetext"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Время на сбор"
-    android:layout_alignParentTop="true"
-    android:layout_marginTop="10dp"
-    android:layout_marginLeft="10dp"/>
-<EditText
-    android:id="@+id/timechosen"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="00:45"
-    android:focusable="false"
-    android:focusableInTouchMode="false"
-    android:layout_alignParentRight="true"
-    android:layout_below="@+id/timetext"
-    android:layout_marginTop="10dp"
-    android:layout_marginRight="15dp"/>
-<TextView 
-    android:id="@+id/routegarant"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Гарант маршрута"
-    android:layout_alignParentLeft="true"
-    android:layout_below="@+id/timechosen"
-    android:layout_marginTop="10dp"
-    android:layout_marginLeft="10dp"/>
-<Spinner
-    android:id="@+id/routespinner"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/routegarant"
-    android:entries="@array/garant_percent"
-    android:prompt="@string/routeacc"
-    android:layout_marginTop="10dp"
-    android:layout_marginRight="15dp"
-    android:layout_alignParentRight="true"></Spinner>
-<TextView 
-    android:id="@+id/traffictext"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Учитывать пробки"
-    android:layout_alignParentLeft="true"
-    android:layout_below="@+id/routespinner"
-    android:layout_marginTop="10dp"
-    android:layout_marginLeft="10dp"/>
-<ToggleButton 
-    android:id="@+id/trafficbutton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:layout_marginRight="15dp"
-    android:layout_alignParentRight="true"
-    android:checked="true"
-    android:layout_below="@+id/traffictext"/>
-<TextView 
-    android:id="@+id/transptype"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Тип транспорта"
-    android:layout_alignParentLeft="true"
-    android:layout_below="@+id/trafficbutton"
-    android:layout_marginTop="10dp"
-    android:layout_marginLeft="10dp"/>
-<Spinner
-    android:id="@+id/transpspin"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/transptype"
+    android:layout_height="match_parent" >
 
-    android:entries="@array/transp_array"
-    android:layout_marginTop="10dp"
-    android:layout_marginRight="15dp"
-    android:layout_alignParentRight="true"></Spinner>
+    <TextView
+        android:id="@+id/timetext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@+string/gather_time" />
+
+    <EditText
+        android:id="@+id/timechosen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/timetext"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:text="00:45" />
+
+    <TextView
+        android:id="@+id/routegarant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/timechosen"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@+string/route_guarant" />
+
+    <Spinner
+        android:id="@+id/routespinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/routegarant"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:entries="@array/garant_percent"
+        android:prompt="@string/routeacc" >
+    </Spinner>
+
+    <TextView
+        android:id="@+id/traffictext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/routespinner"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@+string/note_traffic" />
+
+    <ToggleButton
+        android:id="@+id/trafficbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/traffictext"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:checked="true" />
+
+    <TextView
+        android:id="@+id/transptype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/trafficbutton"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/transp_type" />
+
+    <Spinner
+        android:id="@+id/transpspin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/transptype"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:entries="@array/transp_array" >
+    </Spinner>
 
 </RelativeLayout>

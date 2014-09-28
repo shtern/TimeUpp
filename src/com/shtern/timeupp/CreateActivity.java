@@ -1,14 +1,16 @@
 package com.shtern.timeupp;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+
+
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.MapFragment;
@@ -16,8 +18,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
+
+
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
@@ -28,13 +30,12 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -52,7 +53,7 @@ public class CreateActivity extends Activity {
 	EditText timeselector;
 	EditText name_et;
 	EditText dest_et;
-	EditText address;
+	AutoCompleteTextView address;
 	Button savebutton;
 	Button startbutton;
 	TextView aligntv;
@@ -84,9 +85,11 @@ public class CreateActivity extends Activity {
 		year = cal.get(Calendar.YEAR);
 		dataselector = (EditText) createpage.findViewById(R.id.date_selector);
 		timeselector = (EditText) createpage.findViewById(R.id.time_selector);
-		address = (EditText) createpage.findViewById(R.id.adress);
+		address = (AutoCompleteTextView) createpage.findViewById(R.id.adress);
+		address.setAdapter(new PlacesAutoCompleteAdapter(this, R.layout.search_item));
 		if (!time.equals(""))
 			timeselector.setText(time);
+		else timeselector.setText(String.valueOf(cal.get(Calendar.HOUR_OF_DAY)+1)+":00");
 
 		name_et = (EditText) createpage.findViewById(R.id.name_edittext);
 		if (!name.equals(""))
@@ -94,6 +97,7 @@ public class CreateActivity extends Activity {
 		dest_et = (EditText) createpage.findViewById(R.id.adress);
 		if (!destination.equals(""))
 			dest_et.setText(destination);
+		
 		timeselector.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -112,6 +116,7 @@ public class CreateActivity extends Activity {
 				}
 			}
 		});
+		dataselector.setText(day+"/"+month+"/"+year);
 		dataselector.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -149,8 +154,11 @@ public class CreateActivity extends Activity {
 			public void onClick(View v) {
 				// MainActivity.this.itemlist.add(new
 				// DestListItem(dest_et.getText().toString(),name_et.getText().toString(),timeselector.getText().toString()));
+				String routename="";
+				if (name_et.getText().toString().equals("")) routename=name_et.getHint().toString();
+				else routename=name_et.getText().toString();
 				MainActivity.addItem(new DestListItem(dest_et.getText()
-						.toString(), name_et.getText().toString(), timeselector
+						.toString(), routename, timeselector
 						.getText().toString()));
 				CreateActivity.this.finish();
 			}
@@ -187,7 +195,7 @@ public class CreateActivity extends Activity {
 				});
 
 				final Button prev = (Button) page.findViewById(R.id.prevbutton);
-				if (MainActivity.pagerAdapter.getCount() > 1)
+				if (MainActivity.pagerAdapter.getCount() > 2)
 					prev.setOnClickListener(new OnClickListener() {
 
 						@Override
@@ -206,11 +214,8 @@ public class CreateActivity extends Activity {
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
-						final Intent intent = new Intent(
-								getApplicationContext(), SettingsActivity.class);
-						intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-						startActivity(intent);
+						MainActivity.prev_page=MainActivity.pager.getCurrentItem();
+						MainActivity.pager.setCurrentItem(0);
 					}
 				});
 				MainActivity.pagerAdapter.addView(page);
@@ -222,6 +227,7 @@ public class CreateActivity extends Activity {
 		pagerAdapter.addView(createpage);
 		mappage = (RelativeLayout) getLayoutInflater().inflate(
 				R.layout.mappage, null);
+		
 		pagerAdapter.addView(mappage);
 		try {
 			// Loading map
@@ -230,6 +236,8 @@ public class CreateActivity extends Activity {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		AutoCompleteTextView autoCompView = (AutoCompleteTextView) mappage.findViewById(R.id.searchbox);
+	    autoCompView.setAdapter(new PlacesAutoCompleteAdapter(this, R.layout.search_item));
 		googleMap.setOnMapLongClickListener(new OnMapLongClickListener() {
 
 			@Override
@@ -265,6 +273,16 @@ public class CreateActivity extends Activity {
 			}
 
 		});
+		googleMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener(){
+
+			@Override
+			public void onInfoWindowClick(Marker arg0) {
+				// TODO Auto-generated method stub
+				address.setText(filterAddress);
+				pager.setCurrentItem(0);
+			}
+			
+		});
 		googleMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 
 			@Override
@@ -277,7 +295,12 @@ public class CreateActivity extends Activity {
 		});
 	}
 
-
+	  @Override
+	  public void onBackPressed() {
+		  if (pager.getCurrentItem()==1)
+			  pager.setCurrentItem(0);
+		  else super.onBackPressed();
+	  }
 	private void initilizeMap() {
 		if (googleMap == null) {
 			googleMap = ((MapFragment) getFragmentManager().findFragmentById(
@@ -340,4 +363,6 @@ public class CreateActivity extends Activity {
 		mTimePicker.setTitle("Select Time");
 		mTimePicker.show();
 	}
+	
+	
 }
